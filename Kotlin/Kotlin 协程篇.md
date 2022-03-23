@@ -1,6 +1,6 @@
 [TOC]
 
-### CoroutineScope 作用域
+## CoroutineScope 作用域
 
 指定协程执行的范围
 
@@ -35,7 +35,7 @@ lifecycleScope.launch {
 ```
 在 `Fragment `中也是使用 `lifecycleScope` 作用域，在 `ViewModel `中用 `viewModelScope `
 
-#### GlobalScope
+### GlobalScope
 
 全局的 `CoroutineScope`，没有绑定到任何Job。
 `GlobalScope` 用于启动在整个应用程序生命周期内运行且不会过早取消的顶级协程.
@@ -43,7 +43,7 @@ lifecycleScope.launch {
 
 
 
-### suspendCoroutine 
+## suspendCoroutine 
 
 挂起函数
 
@@ -146,7 +146,7 @@ private suspend fun doTakePicture(camera: Camera?): ByteArray? = suspendCoroutin
 
 在此函数中，`resume`和`resumeWithException`可以在运行暂停功能的同一堆栈中同步使用，也可以稍后在同一线程或不同执行线程中异步使用。随后调用任何恢复函数将产生一个`java.lang.IllegalStateException: Already resumed`的异常。另外，如果此函数中使用了`resumeWithException`，在调用它的地方也要进行异常捕获处理。
 
-### suspendCancellableCoroutine
+## suspendCancellableCoroutine
 
 可取消的挂起函数
 
@@ -228,15 +228,15 @@ if(it.isActive) {
 
 
 
-### Flow
+## Flow
 
-#### 什么是Flow
+### 什么是Flow
 
 Flow 库是在 Kotlin Coroutines 1.3.2 发布之后新增的库，也叫做异步流
 
 类似 RxJava 的 Observable 、 Flowable 等。用生产者和消费者来做对比，简单来讲就可以一边生产一边消费的作用。
 
-#### 使用Flow
+### 使用Flow
 
 先看一个简单的使用例子
 
@@ -271,7 +271,7 @@ lifecycleScope.launch {
 
 其中Flow的接口，只有一个`collect`函数。和RXjava相比的话，可以理解为 `collect()` 对应`subscribe()`，而 `emit()` 对应`onNext()`。
 
-#### 切换线程
+### 切换线程
 默认情况没有切换线程的话flow的生产者和消费者是同步非阻塞的：
 ```kotlin
 lifecycleScope.launch {
@@ -325,7 +325,7 @@ CoroutineScope 下。
 
 
 
-#### Flow 什么时候开始执行
+### Flow 什么时候开始执行
 
 Flow 是一种类似于序列的冷流 ， flow 构建器中的代码直到流被收集的时候才运行。
 
@@ -353,7 +353,7 @@ f.collect {
 	......
 ```
 
-#### Flow 怎么取消
+### Flow 怎么取消
 
 Flow是需要写在 `lanuch` 中的，所以取消的话只需要调用`launch`的`cancel()`把`launch`取消就行了
 ```kotlin
@@ -374,7 +374,7 @@ d.cancel()
 这样一秒后这个flow操作就会被取消
 
 
-#### Flow 可以用在哪里
+### Flow 可以用在哪里
 用处一：后台进行下载操作，主线程更新下载进度：
 ```kotlin
 doDownload().flowOn(Dispatchers.IO).collect {
@@ -433,7 +433,7 @@ I: 获取到 1000 个设备，开始更新列表
 I: end, count: 100
 ```
 
-#### Flow 其他操作符
+### Flow 其他操作符
 
 例子：
 
@@ -455,7 +455,7 @@ repeat(10) {
 9
 ```
 
-##### map 
+#### map 
 
 使用map我们可以将最终结果映射为其他类型，融合了Rxjava的map与flatMap的功能
 代码如下所示：
@@ -473,7 +473,7 @@ foo().map {
 ...
 转换成了String : 9
 ```
-##### filter
+#### filter
 
 通过 filter 可以对结果添加过滤条件，如下所示，仅打印出大于7的值
 ```kotlin
@@ -489,7 +489,7 @@ foo().filter {
 9
 ```
 
-##### transform
+#### transform
 
 transform可以自定义转换逻辑，除了可以实现filter和map的功能，还可以实现其他功能
 ```kotlin
@@ -510,7 +510,7 @@ transform to string :9
 emit second :9
 ```
 
-#####  末端操作符
+####  末端操作符
 上面常用的`collect`就是一个末端操作符，除此之外还有`toList`、`reduce`、`fold`、`asLiveData`等操作符
 `toList` 就如字面意思，把所有结果转成List数组
 `reduce` 可以把所有结果累加起来：
@@ -544,11 +544,11 @@ I: count: 3
 I: count: 100
 ```
 
-##### 协程背压
+### 协程背压
 
 Kotlin流程设计中的所有函数都标有suspend修饰符，具有在不阻塞线程的情况下挂起调用程序执行的强大功能。因此，当流的收集器不堪重负时，它可以简单地挂起发射器，并在准备好接受更多元素时稍后将其恢复。
 
-######  buffer 操作符
+####  buffer 操作符
 
 例如，发射者需要100毫秒处理并产生一个数据，而收集者需要200毫秒来处理这个数据，这时候发射者发就需要等收集者处理完上个数据再去花费100毫秒处理产生一个新数据，这样一个周期就是300毫秒，而使用` buffer`操作符就可以并发运行流中发射元素的代码以及收集的代码， 当发射者发射数据时，收集者还没处理完，会将这个数据先缓存下来，收集者处理完上一个数据之后立马就可以处理下一个数据。这样除了第一个周期是300毫秒，接下来的每个周期都是200毫秒，会节省很多时间。
 默认可以无限制添加数据，但是超出默认缓存区域大小时，会 `suspend` 暂停。
@@ -570,7 +570,7 @@ getDevices().flowOn(Dispatchers.IO).conflate().collect {
 println("end, count: $count")
 ```
 
-######  conflate 操作符
+####  conflate 操作符
 
 用了 `conflate` 操作符，当发射者发射数据时，收集者还在处理上一个数据时则会跳过这个值，上面例子中`buffer()` 改成 `conflate()` 接口如下：
 
@@ -592,7 +592,7 @@ end, count: 11
 ```
 只处理了11个
 
-###### collectLatest()操作符
+#### collectLatest()操作符
 
 只处理最新的数据，这看上去似乎与 conflate 没有区别，其实区别大了：它并不会直接用新数据覆盖老数据，而是每一个都会被处理，只不过如果前一个还没被处理完后一个就来了的话，处理前一个数据的逻辑就会被取消。
 
@@ -612,9 +612,9 @@ start
 end, count: 1
 ```
 
-##### 组合多个流
+### 组合多个流
 
-###### Zip
+#### Zip
 
 `zip` 操作符可以组合两个流中的相关值：
 ```kotlin
@@ -637,7 +637,7 @@ nums.zip(strs) { a, b ->
 3 -> three
 ```
 
-###### Combine
+#### Combine
 当流表示一个变量或操作的最新值时，可能需要执行计算，这依赖于相应流的最新值，并且每当上游流产生值的时候都需要重新计算。
 也就是说当两个流中任何一个流产生了新的流的时候，并且这两个流都已经有值发射了，就将这两个流当前最新的值组合在一起。
 ```kotlin
