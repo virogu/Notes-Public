@@ -1,0 +1,5 @@
+查看占用端口的进程
+netstat -ano | findstr "5037"
+tasklist | findstr "12508"
+5037 是要查询的端口  12508 是占用端口的进程号
+

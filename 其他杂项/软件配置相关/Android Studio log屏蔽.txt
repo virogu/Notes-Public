@@ -1,0 +1,22 @@
+
+让控制台只显示过滤指定字符的log
+
+^(.*(10:30)).*$
+
+
+让控制台不显示指定字符
+
+^(?!.*(I/CameraFramework:|I/System.out:|I/BufferQueueProducer:|W/MALI:|I/LocationNetworkUtil:|I/art:|I/MOS:|I/WatchDog:|W/VideoAdd:)).*$
+^(?!.*(I/Camera:|I/System.out:|I/art:|I/MOS:|I/WatchDog:|W/VideoAdd:|I/BufferQueueProducer:|I/KeyguardService:|I/DisplayDevice:)).*$
+^(?!.*()).*$
+^(?!.*(FTDHandlerThrea|System.out:|I/Camera:)).*$
+^(?!.*(waiting for activeVoice|handleMessage:|I/System.out)).*$
+
+^(?!.*(E/LIGHT:|E/Accel:|E/MAL-RDS:|E/Wifi|E/Camera3|E/AEE_AED:|E/VDO_LOG:|E/MNLD:|E/agps:)).*$
+^(?!.*(E/LIGHT:|HWComposer|Light|VDO_LOG|I/MAL-RDS|MOS:|wmt_launcher|Cam3Device|SensorListener|GyroCollector|AppStreamMgr|DisplayDevice|BufferQueueProducer|thermal_repeater)).*$
+^(?!.*(E/LIGHT:|HWComposer|Light|VDO_LOG|I/MAL-RDS|MOS:|wmt_launcher|Cam3Device|SensorListener|GyroCollector|AppStreamMgr|DisplayDevice|BufferQueueProducer|thermal_repeater|E/lsc_mgr_dft_misc:|E/Accel:|E/MAL-RDS:|E/paramctrl_per_frame:)).*$
+
+290C 屏蔽系统Error日志
+^(?!.*(/MtkCam|/Mtkcam|E/LIGHT|E/MAL-RDS:|E/agps|E/WifiStateMachine|WifiScanningService|E/MNLD|GnssLocationProvider|CellLocation|AudioFlinger)).*$
+
+^(?!.*(D/agps|MtkCam|HWComposer|Mtk|Lights|Network|PROXIMITY|VDO_LOG|ACodec|MOS|LIGHT|Wifi|mtk|MAL-RDS|lights|gps|wmt_launcher|BufferQueueProducer|Audio|YUVFaceKt|libc-netbsd|DisplayDevice|mnl_linux|agps|AlarmManager|HardwareVideo|Accel|YYStatusManagerService|IpReachabilityMonitor|BandwidthController|MAL-RILP)).*$

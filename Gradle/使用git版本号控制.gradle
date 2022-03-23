@@ -1,0 +1,47 @@
+ defaultConfig {
+        minSdkVersion minVersion
+        targetSdkVersion versionTarget
+        versionCode git_commit_count()
+        versionName "2.1."
+		
+		
+		def gitId = git_commit_shortid()
+        buildConfigField 'String', 'COMMIT_ID', "\"$gitId\""
+}
+
+ buildTypes {
+    release {
+       versionNameSuffix formatedDate() + "." + git_commit_shortid()
+    }
+}
+
+
+def git_commit_count() {
+    description 'Get git revision number.'
+    new ByteArrayOutputStream().withStream { os ->
+        def result = exec {
+            executable = 'git'
+            args = ['rev-list', '--all','--count']
+            standardOutput = os
+        }
+        String revision = os.toString().trim()
+        return Integer.parseInt(revision) + 5900
+    }
+}
+
+def formatedDate() {
+    return new Date().format("YYMMdd")
+}
+
+
+def git_commit_shortid() {
+    new ByteArrayOutputStream().withStream { os ->
+        def result = exec {
+            executable = 'git'
+            args = ['rev-parse', '--short','HEAD']
+            standardOutput = os
+        }
+        String commit_id = os.toString().trim()
+        return commit_id
+    }
+}

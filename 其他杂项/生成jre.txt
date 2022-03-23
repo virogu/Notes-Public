@@ -1,0 +1,4 @@
+打开命令提示符，要cd到%JAVA_HOME%（D:\JAVA\JDK11）(用户安装路径)
+然后运行命令：
+bin\jlink.exe --module-path jmods --add-modules java.desktop --output jre
+会在本目录下生成jre文件夹
