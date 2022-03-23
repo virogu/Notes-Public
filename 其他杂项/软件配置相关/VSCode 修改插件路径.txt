@@ -1,0 +1,2 @@
+右击vs code这个软件程序属性 在后边增加
+--extensions-dir "D:\VSCode\extensions"

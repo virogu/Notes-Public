@@ -1,0 +1,3 @@
+Customize the LayoutManager of RecyclerView(自定义LayoutManager):
+https://github.com/DingMouRen/LayoutManagerGroup.git
+

@@ -1,0 +1,24 @@
+def getCurrentFlavor() {
+    Gradle gradle = getGradle()
+    String tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+    Pattern pattern
+    println("tskReqStr: " + tskReqStr)
+    if (tskReqStr.contains("assemble")) {
+        if (tskReqStr.contains("Cn") || tskReqStr.contains("En"))
+            pattern = Pattern.compile("assemble(\\w+)(Cn|En)(Release|Debug)")
+        else
+            pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
+    } else {
+        if (tskReqStr.contains("Cn") || tskReqStr.contains("En"))
+            pattern = Pattern.compile("generate(\\w+)(Cn|En)(Release|Debug)")
+        else
+            pattern = Pattern.compile("generate(\\w+)(Release|Debug)")
+    }
+    Matcher matcher = pattern.matcher(tskReqStr)
+    if (matcher.find())
+        return matcher.group(1)
+    else {
+        println "NO MATCH FOUND"
+        return ""
+    }
+}
