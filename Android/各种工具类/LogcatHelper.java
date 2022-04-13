@@ -1,6 +1,3 @@
-## LogcatHelper
-
-```java
 import android.content.Context;
 
 import com.tsinglink.android.mpu.BuildConfig;
@@ -160,4 +157,3 @@ public class LogcatHelper {
     }
 
 }
-```

@@ -1,5 +1,3 @@
-
-```java
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
@@ -61,5 +59,3 @@ public class BusMutableLiveData<T> extends MutableLiveData<T> {
         }
     }
 }
-
-```

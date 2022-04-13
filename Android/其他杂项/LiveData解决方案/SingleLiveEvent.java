@@ -1,5 +1,3 @@
-
-```java
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,5 +35,3 @@ public class SingleLiveEvent<T> extends MutableLiveData<T> {
         setValue(null);
     }
 }
-
-```

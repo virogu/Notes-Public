@@ -1,6 +1,3 @@
-## SerialUtil
-
-```java
 import android.text.TextUtils;
 
 public class SerialUtil {
@@ -139,4 +136,3 @@ public class SerialUtil {
     }
 }
 
-```

@@ -1,5 +1,3 @@
-
-```kotlin
 import androidx.lifecycle.LiveData
 import retrofit2.*
 import java.lang.reflect.ParameterizedType
@@ -49,4 +47,3 @@ class LiveDataCallAdapterFactory : CallAdapter.Factory() {
     }
 
 }
-```
