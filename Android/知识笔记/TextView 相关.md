@@ -14,10 +14,14 @@
     android:marqueeRepeatLimit="marquee_forever"
     android:text="人民日报生活漫步：莫让千元打车费毁了专车" />
 ```
-`focusableInTouchMode="true"`
-`focusable="true"`
-`clickable="true"`
-`singleLine="true"` 
-`android:ellipsize="marquee"`
+
+```xml
+focusableInTouchMode="true"
+focusable="true"
+clickable="true"
+singleLine="true"
+android:ellipsize="marquee"
+```
 以上五个属性必须设置
+
 `marqueeReatLimit`属性是滚动重复次数，设置为`marquee_forever` 意思为一直都是滚动模式。
