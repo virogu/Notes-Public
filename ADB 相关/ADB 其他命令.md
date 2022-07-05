@@ -51,35 +51,3 @@ adb shell dumpsys media.camera |grep picture-size
 adb shell dumpsys media.camera > F:\Data\桌面\camera.txt
 ```
 
-模拟开关机广播
-```cmd
-adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
-```
-
-设置桌面
-```cmd
-adb shell "cmd package set-home-activity com.xxxx/com.xxx.MainActivity" 
-```
-
-点击HOME键
-```cmd
-adb shell "input keyevent 3"
-```
-
-模拟点击屏幕
-```cmd
-adb shell "input keyboard text 'a text'"
-```
-
-模拟输入文字
-```cmd
-adb shell "input keyevent 3"
-```
-
-设置默认输入法
-```cmd
-adb shell settings put secure default_input_method com.sohu.inputmethod.sogou/.SougouIME
-
-adb shell settings put secure default_input_method com.android.inputmethod.latin/.LatinIME
-```
-
