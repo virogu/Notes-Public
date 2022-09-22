@@ -1,3 +1,16 @@
+
+# 查看apk签名信息
+
+## 直接用Android-SDK中的工具查看
+```
+java -jar .\apksigner.jar verify --verbose --print-certs xxx.apk
+```
+
+其中 `apksigner.jar` 工具包位置在 `Android-SDK` 目录下面，`Android-SDK\build-tools\xx.x.x\lib`
+
+
+## 使用JDK中的工具查看
+
 转自：https://blog.csdn.net/findsafety/article/details/25365997
 
 假定安装了JDK，如果想查HelloWorld.apk所使用的签名的fingerprint，可以这样做：
