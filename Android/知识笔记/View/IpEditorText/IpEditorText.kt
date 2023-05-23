@@ -17,7 +17,6 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
-import lonbon.hospital.ui.theme.R
 
 class IpEditorText(context: Context, attrs: AttributeSet) : LinearLayoutCompat(context, attrs) {
 
@@ -48,6 +47,8 @@ class IpEditorText(context: Context, attrs: AttributeSet) : LinearLayoutCompat(c
     private var boxCornerRadiusBottomStart: Float
     private var boxCornerRadiusBottomEnd: Float
 
+    private var layoutStyle: Int = 0
+
     private var ips: SparseArray<String> = SparseArray()
     private var ipViewCount = 4
 
@@ -62,8 +63,8 @@ class IpEditorText(context: Context, attrs: AttributeSet) : LinearLayoutCompat(c
             suffix = it.getString(R.styleable.IpEditorText_splitText) ?: suffix
             ipViewCount = it.getInt(R.styleable.IpEditorText_itemCount, 4)
             ipViewCount = ipViewCount.coerceAtLeast(1).coerceAtMost(4)
-            itemWidth = it.getDimensionPixelSize(R.styleable.IpEditorText_itemWidth, -2)
-            itemHeight = it.getDimensionPixelSize(R.styleable.IpEditorText_itemHeight, -2)
+            itemWidth = it.getDimensionPixelSize(R.styleable.IpEditorText_itemWidth, -1)
+            itemHeight = it.getDimensionPixelSize(R.styleable.IpEditorText_itemHeight, -1)
 
             textSize = it.getDimension(
                 R.styleable.IpEditorText_textSize,
@@ -90,6 +91,7 @@ class IpEditorText(context: Context, attrs: AttributeSet) : LinearLayoutCompat(c
             boxCornerRadiusBottomEnd =
                 it.getDimension(R.styleable.IpEditorText_boxCornerRadiusBottomEnd, -1f)
 
+            layoutStyle = it.getInt(R.styleable.IpEditorText_layoutStyle, 0)
             ipText = it.getString(R.styleable.IpEditorText_ipText)
             itemDisableIndex = it.getString(
                 R.styleable.IpEditorText_itemDisableIndex
@@ -131,9 +133,9 @@ class IpEditorText(context: Context, attrs: AttributeSet) : LinearLayoutCompat(c
                 AppCompatTextView(context).apply {
                     layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, itemHeight).apply {
                         setPadding(0, 0, 0, 0)
-                        gravity = Gravity.CENTER
+                        gravity = Gravity.CENTER or Gravity.BOTTOM
                     }
-                    gravity = Gravity.CENTER
+                    gravity = Gravity.CENTER or Gravity.BOTTOM
                     setPadding(0, 0, 0, 0)
                     text = suffix
                 }.also(::addView)
@@ -189,7 +191,13 @@ class IpEditorText(context: Context, attrs: AttributeSet) : LinearLayoutCompat(c
             d.strokeColor = ColorStateList.valueOf(boxStrokeColor)
             d.fillColor = ColorStateList.valueOf(mBackgroundColor)
         }
-        this.background = boxBackground
+        if (layoutStyle == 1) {
+            editorViews.forEach {
+                it.text.background = boxBackground
+            }
+        } else {
+            this.background = boxBackground
+        }
     }
 
     private fun EditText.addListener(index: Int) {
