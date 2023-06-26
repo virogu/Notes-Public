@@ -1,0 +1,16 @@
+#添加镜像源
+sudo gedit /etc/apt/sources.list
+deb [by-hash=force] https://mirrors.aliyun.com/deepin apricot main contrib non-free
+
+#更新软件包列表
+sudo apt update
+
+#查看软件库中的jdk版本
+apt search openjdk
+
+#安装所需JDK版本
+sudo apt install -y openjdk-8-jdk
+sudo apt install -y openjdk-11-jdk
+
+#查询或修改JDK版本
+sudo update-alternatives --config java
