@@ -18,3 +18,14 @@ ssh-keygen -t rsa
 #将本机秘钥添加到远程客户端
 ssh-copy-id user@127.0.0.1
 也可以手动复制id_rsa.pub到远程客户端的authorized_keys里面
+
+如果配置没问题，而且确认密钥已经加到了authorized_keys里面，但是仍然无法登录，
+检查一下ssh文件夹权限，ssh对文件权限要求非常严格
+
+.ssh 目录的权限必须是 700
+sudo chmod 700 /root/.ssh
+sudo chmod 700 /home/user/.ssh
+
+authorized_keys 文件权限必须是600
+sudo chmod /root/.ssh/authorized_keys
+sudo chmod /home/user/.ssh/authorized_keys
